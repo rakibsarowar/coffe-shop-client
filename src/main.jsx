@@ -9,6 +9,7 @@ import {
 import AddCoffee from './compoents/addCoffee.jsx';
 import UpdateCoffee from './compoents/UpdateCoffee.jsx';
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
   {
     path: 'addCoffee',
     element:<AddCoffee></AddCoffee>
-  }
+  } 
 ]);
 
 
