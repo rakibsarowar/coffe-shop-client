@@ -1,8 +1,8 @@
-
+import Swal from 'sweetalert2'
 
 const addCoffee = () => {
 
-    const handleAddCoffee = event =>{
+    const handleAddCoffee = event => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
@@ -13,24 +13,33 @@ const addCoffee = () => {
         const details = form.details.value;
         const photo = form.photo.value;
 
-        const newCoffee = {name, quantity, supplier, taste, category, details, photo}
-        console.log(newCoffee) 
+        const newCoffee = { name, quantity, supplier, taste, category, details, photo }
+        console.log(newCoffee)
 
         // Send data to the server
-        fetch('http://localhost:5000/coffee',{
+        fetch('http://localhost:5000/coffee', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(newCoffee)
         })
-        .then(res => res.json())
-        .then (data =>{
-            console.log(data);
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if(data.insertedId){
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Data is added sucessfully',
+                        icon: 'error',
+                        confirmButtonText: 'Cool'
+                      })
+                }
+
+            })
 
 
-        
+
     }
 
     return (
@@ -39,7 +48,7 @@ const addCoffee = () => {
             <form onSubmit={handleAddCoffee}>
                 {/* Form Name & Quantity */}
                 <div className="md:flex gap-4">
-                    
+
                     <div className="form-control md:w-1/2 ml-4">
                         <label className="label">
                             <span className="label-text">Coffee Name</span>
@@ -62,7 +71,7 @@ const addCoffee = () => {
 
                 {/* Form supplier row */}
                 <div className="md:flex gap-4">
-                    
+
                     <div className="form-control md:w-1/2 ml-4">
                         <label className="label">
                             <span className="label-text">Supplier</span>
@@ -85,7 +94,7 @@ const addCoffee = () => {
 
                 {/* Category & Details */}
                 <div className="md:flex gap-4">
-                    
+
                     <div className="form-control md:w-1/2 ml-4">
                         <label className="label">
                             <span className="label-text">Category</span>
@@ -108,7 +117,7 @@ const addCoffee = () => {
 
                 {/* Form Name & Quantity */}
                 <div>
-                    
+
                     <div className="form-control ml-4">
                         <label className="label">
                             <span className="label-text">Photo URL</span>
@@ -118,8 +127,8 @@ const addCoffee = () => {
                         </label>
                     </div>
                 </div>
-                
-                <input type="submit" value="" className="btn btn-block mx-4 mt-4"/>
+
+                <input type="submit" value="" className="btn btn-block mx-4 mt-4" />
 
             </form>
         </div>
